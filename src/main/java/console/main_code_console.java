@@ -18,7 +18,15 @@ public class main_code_console {
             input_from_console = in.nextLine().toLowerCase();
 
             if (input_from_console.equals("help")) {
-                System.out.println("HELP");
+                System.out.println("help -> for help");
+                System.out.println("cls / clear -> for clean console");
+                System.out.println("ex / exit -> for exit from console");
+            }
+            else if (input_from_console.equals("cls") || input_from_console.equals("clear")) {
+                System.out.println("\033[H\033[2J");
+            }
+            else if (input_from_console.equals("ex") || input_from_console.equals("exit")) {
+                isRun = false;
             }
 
 

@@ -38,8 +38,8 @@ public class util extends helper_for_util{
      *
      * @return if has a data without null in properties then true otherwise false
      */
-    public static boolean is_has_data_for_bd() {
-        return URL != null && USER != null;
+    public static boolean is_data_has_for_bd() {
+        return URL.equals("") && USER.equals("");
     }
 
     public static Connection get_connection() throws SQLException {
