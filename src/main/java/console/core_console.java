@@ -1,12 +1,11 @@
 package console;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
+
 import java.util.Scanner;
 
-import static DB.util.*;
+import static console.helper_console.*;
+import static console.sql_console.*;
+
 
 public class core_console {
 
@@ -26,30 +25,20 @@ public class core_console {
 
                 if (input_from_console.equals("help")) {
                     System.out.println("help -> for help");
+                    System.out.println("sql -> for sql mode");
                     System.out.println("cls / clear -> for clean console");
                     System.out.println("ex / exit -> for exit from console");
-                } else if (input_from_console.equals("cls") || input_from_console.equals("clear")) {
+                }
+
+                else if (input_from_console.equals("cls") || input_from_console.equals("clear")) {
                     System.out.println("\033[H\033[2J");
-                } else if (input_from_console.equals("sql")) {
+                }
 
-                    System.out.println("SQL MODE (please enter sql query): ");
-                    sql_query = in.nextLine();
+                else if (input_from_console.equals("sql")) {
+                    sql_mode(true);
+                }
 
-                    Connection con = get_connection();
-                    Statement statement = con.createStatement();
-
-                    ResultSet resultSet = statement.executeQuery(sql_query);
-                    ResultSetMetaData metaData = resultSet.getMetaData();
-                    int columnCount = metaData.getColumnCount();
-
-                    while (resultSet.next()) {
-                        for (int i = 1; i <= columnCount; i++) {
-                            System.out.println(metaData.getColumnName(i) + " - " + resultSet.getString(i) + "\t");
-                        }
-                        System.out.println("\n");
-                    }
-
-                } else if (input_from_console.equals("ex") || input_from_console.equals("exit")) {
+                else if (input_from_console.equals("ex") || input_from_console.equals("exit")) {
                     isRun = false;
                 }
             }
