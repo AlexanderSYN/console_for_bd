@@ -3,7 +3,6 @@ package console;
 
 import java.util.Scanner;
 
-import static console.helper_console.*;
 import static console.sql_console.*;
 
 

@@ -1,5 +1,6 @@
 # console for basedate
 # I'm working on this program
+# I use JDBC driver
 
 ## I am creating a console to work with bd much faster in the console, while the console will support MySQL, maybe I will support this program and add posrtgreSql, etc. But for now, I'm working on a simple console with a bd connection.
 ## the file that stores the data for bd is located at src/main/resources/config/database.properties

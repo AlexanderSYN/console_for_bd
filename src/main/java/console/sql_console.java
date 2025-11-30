@@ -1,10 +1,8 @@
 package console;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import static DB.util.get_connection;
 
@@ -24,18 +22,51 @@ public class sql_console  {
                     break;
                 }
 
+                // main variables for sql queries
                 Connection con = get_connection();
                 Statement statement = con.createStatement();
 
-                ResultSet resultSet = statement.executeQuery(sql_query);
-                ResultSetMetaData metaData = resultSet.getMetaData();
-                int columnCount = metaData.getColumnCount();
+                if (sql_query.length() < 6) {
+                    System.out.println("please enter correctly sql query!");
+                }
+                //======================
+                // commands via SELECT
+                //======================
+                else if (sql_query.toLowerCase().substring(0, 6).equals("select")) {
+                    long start_time = System.nanoTime();
 
-                while (resultSet.next()) {
-                    for (int i = 1; i <= columnCount; i++) {
-                        System.out.println(metaData.getColumnName(i) + " - " + resultSet.getString(i) + "\t");
+                    // executing sql query
+                    ResultSet result_set = statement.executeQuery(sql_query);
+                    ResultSetMetaData meta_data = result_set.getMetaData();
+                    int columnCount = meta_data.getColumnCount();
+
+                    // get duration
+                    long end_time = System.nanoTime();
+                    long duration = end_time - start_time;
+
+                    while (result_set.next()) {
+                        for (int i = 1; i <= columnCount; i++) {
+                            System.out.println(meta_data.getColumnName(i) + " - " + result_set.getString(i) + "\t");
+                        }
+                        System.out.println("\n");
                     }
-                    System.out.println("\n");
+                    System.out.printf("запрос занял: %d мс\n", TimeUnit.NANOSECONDS.toMillis(duration));
+                }
+                //=====================
+                // commands via insert
+                //=====================
+                else if (sql_query.toLowerCase().substring(0, 6).equals("insert")) {
+                    long start_time = System.nanoTime();
+
+                    int rows_affected = statement.executeUpdate(sql_query);
+
+                    // get duration
+                    long end_time = System.nanoTime();
+                    long duration = end_time - start_time;
+
+                    System.out.println("Добавлено строк: " + rows_affected);
+
+                    System.out.printf("запрос занял: %d мс \n", TimeUnit.NANOSECONDS.toMillis(duration));
                 }
 
             } catch (Exception e){
