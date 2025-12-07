@@ -11,8 +11,8 @@ public class helper_console {
      *
      * for executing sql queries (for !one line)
      *
-     * @param sql_queries -> the array where all sql queries are stored
-     * @param count_request -> number of requests
+     * @param sql_queries the array where all sql queries are stored
+     * @param count_request  number of requests
      *
      */
     public static void exec_sql_queries(String[] sql_queries, int count_request) {
@@ -147,9 +147,23 @@ public class helper_console {
        } catch (Exception e) {
            System.err.println("[ERROR]: " + e);
        }
+    }
 
+    /**
+     *
+     * @param text to search for the command name (for the mkcommand command)
+     *
+     * @return searches for the name of the command and returns it as a String
+     */
+    public static String get_name_command_from_input(String text) {
+        StringBuilder tmp_name_command = new StringBuilder(" ");
 
-
+        for (char c : text.toCharArray()) {
+            if (Character.isWhitespace(c)) return tmp_name_command.toString();
+            else if (c == ' ') return tmp_name_command.toString();
+            else tmp_name_command.append(c);
+        }
+        return "none";
     }
 
 

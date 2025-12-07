@@ -47,6 +47,23 @@ public class util extends helper_for_util{
     }
 
     /**
+     *
+     * clearing all data from the database.properties
+     *
+     */
+    public static void clear_all_data_from_db_prop() {
+        try {
+            set_url("");
+            set_user("");
+            set_password("");
+            save_config();
+            System.out.println("the data for quick login to your database has been successfully deleted");
+        } catch (Exception e) {
+            System.err.println("[ERROR] " + e);
+        }
+    }
+
+    /**
      * if you do not have data in database.properties, then you will need to write
      * data about the database, otherwise you will be asked to skip writing data or not.
      *

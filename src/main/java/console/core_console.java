@@ -4,7 +4,7 @@ package console;
 import java.util.Scanner;
 
 import static console.sql_console.*;
-
+import static DB.util.*;
 
 public class core_console {
 
@@ -25,6 +25,7 @@ public class core_console {
                 if (input_from_console.equals("help")) {
                     System.out.println("help -> for help");
                     System.out.println("sql -> for sql mode");
+                    System.out.println("clear data -> delete data for a quick login to your database");
                     System.out.println("cls / clear -> for clean console");
                     System.out.println("ex / exit -> for exit from console");
                 }
@@ -32,9 +33,25 @@ public class core_console {
                 else if (input_from_console.equals("cls") || input_from_console.equals("clear")) {
                     System.out.println("\033[H\033[2J");
                 }
+                else if (input_from_console.equals("clear data")) {
+                    clear_all_data_from_db_prop();
+                    break;
+                }
 
                 else if (input_from_console.equals("sql")) {
                     sql_mode(true);
+                }
+                // beta test
+                else if (input_from_console.equals("mkcommand ")) {
+                    if (input_from_console.substring(0, 10).equals(" ") || input_from_console.substring(0,9).equals(" ")) {
+                        System.out.println("Please write like this -> mkcommand name_command command");
+                    }
+
+                    String name_command = helper_console.get_name_command_from_input(input_from_console);
+                    System.out.println(name_command);
+                }
+                else if (input_from_console.equals("mkcommand")) {
+                    System.out.println("Please write like this -> mkcommand name_command command");
                 }
 
                 else if (input_from_console.equals("ex") || input_from_console.equals("exit")) {
