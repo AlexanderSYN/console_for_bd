@@ -125,32 +125,45 @@ public class sql_console  {
                     System.out.printf("запрос занял: %d мс \n", TimeUnit.NANOSECONDS.toMillis(duration));
 
                 }
-                else if (sql_query.toLowerCase().equals("!one line") || sql_query.toLowerCase().equals("!more")) {
-                    System.out.println("max 100 queries");
-                    boolean tmp_run_for_more_line_sql = true;
-                    String input_queries = "";
+                else if (sql_query.toLowerCase().equals("!one line") | sql_query.toLowerCase().equals("!morel")) {
                     int line_sql_query = 0;
-                    String[] sql_queries = new String[100];
+                    int num_line = 1;
+                    String[] sql_queries = new String[101];
 
-                    while (tmp_run_for_more_line_sql) {
-                        if (line_sql_query == 100) {
-                            System.out.println("The limit has been exceeded, and all requests are currently being processed!");
-                            break;
+                    try {
+                        System.out.println("max 100 queries");
+                        boolean tmp_run_for_more_line_sql = true;
+                        String input_queries = "";
+
+                        while (tmp_run_for_more_line_sql) {
+                            if (line_sql_query == 100) {
+                                System.out.println("The limit has been exceeded, and all requests are currently being processed!");
+                                break;
+                            }
+
+                            System.out.print(num_line + " ");
+                            input_queries = in.nextLine();
+                            num_line++;
+
+                            if (input_queries.toLowerCase().equals("done") || input_queries.equals("~")
+                                || input_queries.toLowerCase().equals("ex") || input_queries.toLowerCase().equals("exit")) {
+                                tmp_run_for_more_line_sql = false;
+                                break;
+                            } else {
+                                line_sql_query++;
+                                sql_queries[line_sql_query] = input_queries;
+                            }
                         }
 
-                        input_queries = in.nextLine();
-
-                        if (input_queries.toLowerCase().equals("done") || input_queries.equals("~")) {
-                            tmp_run_for_more_line_sql = false;
-                            break;
-                        } else {
-                            line_sql_query++;
-                            sql_queries[line_sql_query] = input_queries;
-                        }
+                        // executing sql queries
+                        helper_console.exec_sql_queries(sql_queries, line_sql_query);
+                    } catch (ArrayIndexOutOfBoundsException ArrOutOfBounds) {
+                        System.out.println("The limit has been exceeded, and all requests are currently being processed!");
+                        helper_console.exec_sql_queries(sql_queries, line_sql_query);
                     }
-
-                    // executing sql queries
-                    helper_console.exec_sql_queries(sql_queries, line_sql_query);
+                    catch (Exception e) {
+                        System.err.println("[ERROR] " + e);
+                    }
 
                 }
 

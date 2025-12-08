@@ -26,6 +26,7 @@ public class helper_console {
 
            for (int i = 0; i <= count_request; i++) {
                if (sql_queries[i] == null) continue;
+               else if (sql_queries[i].isEmpty()) continue;
                System.out.println("name query: " + sql_queries[i] + "\nnumber: " + i);
 
                if (sql_queries[i].length() < 6) {

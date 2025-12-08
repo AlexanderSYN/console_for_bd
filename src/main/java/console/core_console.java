@@ -1,6 +1,5 @@
 package console;
 
-
 import java.util.Scanner;
 
 import static console.sql_console.*;
@@ -53,6 +52,7 @@ public class core_console {
                 else if (input_from_console.equals("mkcommand")) {
                     System.out.println("Please write like this -> mkcommand name_command command");
                 }
+
 
                 else if (input_from_console.equals("ex") || input_from_console.equals("exit")) {
                     isRun = false;
