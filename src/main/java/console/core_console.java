@@ -26,6 +26,9 @@ public class core_console {
                     if (input_from_console.equals("help")) {
                         System.out.println("help -> for help");
                         System.out.println("sql -> for sql mode");
+                        System.out.println("mkcommand (name command) (command) -> for create your commands ");
+                        System.out.println("output-all-commands / all-commands -> output of all your commands");
+                        System.out.println("run (name_your_command) -> to run your command");
                         System.out.println("clear data -> delete data for a quick login to your database");
                         System.out.println("cls / clear -> for clean console");
                         System.out.println("ex / exit -> for exit from console");
@@ -46,6 +49,10 @@ public class core_console {
                         isRun = false;
                     }
 
+                    else if (input_from_console.substring(0,4).equals("run ")) {
+                        helper_console.run_command(input_from_console.substring(4));
+                    }
+
                     // beta test
                     else if (input_from_console.substring(0, 10).equals("mkcommand ")) {
                         if (input_from_console.substring(0, 10).equals(" ") || input_from_console.substring(0,9).equals(" ")) {
@@ -55,12 +62,18 @@ public class core_console {
                         String name_command = input_from_console.substring(10);
                         System.out.println(helper_console.get_name_command(input_from_console));
                         System.out.println(helper_console.get_command(input_from_console));
-                        write_to_json(helper_console.get_name_command(input_from_console), helper_console.get_command(input_from_console));
+                        write_to_json(helper_console.get_name_command(input_from_console.trim()), helper_console.get_command(input_from_console));
 
                     }
+
                     else if (input_from_console.equals("mkcommand")) {
                         System.out.println("Please write like this -> mkcommand name_command command");
                     }
+                    else if (input_from_console.equals("all-commands") || input_from_console.equals("output-all-commands")) {
+                        output_commands_from_json();
+                    }
+
+
 
 
 

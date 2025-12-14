@@ -1,3 +1,5 @@
 {
-  "sel " : "123"
+  "users " : "select * from users",
+  "sel" : "123",
+  "t" : "test"
 }
