@@ -1,3 +1,8 @@
+<div style="align:center">
+    <a href="COMMANDS_RU.md">RU</a> |
+    EN
+</div>
+
 >[!TIP]
 > All the commands that can be used in console are written here
 
@@ -17,10 +22,17 @@ delete data for a quick login to your database
 ``` clear data ```
 
 >[!TIP]
->commands to storing in json file
-create your command
+>the commands are stored in a json file
 
+to create your command
 ```mkcommand (name command) (command)```
+
+to output all your commands from json
+```all-commands```
+```output-all-commands```
+
+to run your command, you need to write like this
+```run (your command)```
 
 just exit
 ``` exit ```

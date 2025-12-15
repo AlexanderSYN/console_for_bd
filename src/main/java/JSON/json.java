@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class json {
     private static final String CONFIG_PATH = "src/main/resources/config/commands.json";
@@ -36,9 +37,15 @@ public class json {
 
             // We read the existing data if the file exists.
             if (configFile.exists() && configFile.length() > 0) {
-                data = objectMapper.readValue(configFile,
-                        new TypeReference<Map<String, String>>() {
-                        });
+                Scanner in = new Scanner(System.in);
+                System.out.print("Are you sure want to change a command (y/n): ");
+                String choice = in.nextLine();
+                if (choice.toLowerCase().equals("y") || choice.toLowerCase().equals("yes")) {
+                    data = objectMapper.readValue(configFile,
+                            new TypeReference<Map<String, String>>() {
+                            });
+                } else return false;
+
             } else {
                 data = new HashMap<>();
             }

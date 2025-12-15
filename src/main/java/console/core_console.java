@@ -12,7 +12,6 @@ public class core_console {
 
     protected static boolean isRun = true;
     protected static String input_from_console;
-    protected static String sql_query;
 
     public static void start_console() {
         try {
@@ -53,16 +52,18 @@ public class core_console {
                         helper_console.run_command(input_from_console.substring(4));
                     }
 
-                    // beta test
+                    // create command (mkcommand)
                     else if (input_from_console.substring(0, 10).equals("mkcommand ")) {
                         if (input_from_console.substring(0, 10).equals(" ") || input_from_console.substring(0,9).equals(" ")) {
                             System.out.println("Please write like this -> mkcommand name_command command");
                         }
 
                         String name_command = input_from_console.substring(10);
-                        System.out.println(helper_console.get_name_command(input_from_console));
-                        System.out.println(helper_console.get_command(input_from_console));
-                        write_to_json(helper_console.get_name_command(input_from_console.trim()), helper_console.get_command(input_from_console));
+
+
+                        if (write_to_json(helper_console.get_name_command(input_from_console.trim()), helper_console.get_command(input_from_console))) {
+                            System.out.println("success");
+                        } else System.err.println("failed");
 
                     }
 
@@ -72,9 +73,6 @@ public class core_console {
                     else if (input_from_console.equals("all-commands") || input_from_console.equals("output-all-commands")) {
                         output_commands_from_json();
                     }
-
-
-
 
 
                 } catch (Exception e) {
