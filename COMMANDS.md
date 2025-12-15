@@ -19,6 +19,7 @@ delete data for a quick login to your database
 >[!TIP]
 >commands to storing in json file
 create your command
+
 ```mkcommand (name command) (command)```
 
 just exit
