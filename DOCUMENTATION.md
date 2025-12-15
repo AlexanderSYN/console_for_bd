@@ -25,3 +25,9 @@
 <ol>
 <li> Main -> start program
 </ol>
+
+# (folder) resources
+<ol>
+<li>commands.json -> your commands are stored here</li>
+<li>database.properties -> your data from the database is stored here for quick login</li>
+</ol>
