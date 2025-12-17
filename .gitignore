@@ -34,5 +34,8 @@ build/
 ### VS Code ###
 .vscode/
 
+### for my exe files ###
+out/*
+
 ### Mac OS ###
 .DS_Storeconsole_for_db_exe.rar

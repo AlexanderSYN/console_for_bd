@@ -24,8 +24,11 @@ delete data for a quick login to your database
 >[!TIP]
 >the commands are stored in a json file
 
-to create your command
+to create your team (for writing sql queries quickly)
 ```mkcommand (name command) (command)```
+
+to delete a command from json
+```rmc (your name command)```
 
 to output all your commands from json
 ```all-commands```

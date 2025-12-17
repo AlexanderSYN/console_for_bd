@@ -269,14 +269,14 @@ public class helper_console {
             System.out.println();
 
         } catch (Exception e) {
-            System.err.println("[ERROR]: " + e);
+            System.err.println("[ERROR] " + e);
         }
     }
 
     /**
      * the method of getting the name command from mkcommand
      *
-     * @param text - here is the text of the user with the mkcommand command
+     * @param text here is the text of the user with the mkcommand command or rm command
      * @return command name
      */
     public static String get_name_command(String text) {
@@ -284,13 +284,16 @@ public class helper_console {
         StringBuilder tmp_name_command = new StringBuilder();
 
         for (int i = 0; i <= text.length(); i++) {
-            if (count_space == 1) tmp_name_command.append(text.charAt(i));
+            if (count_space == 1) {
+                if (text.charAt(i) == ' ') return tmp_name_command.toString();
+                tmp_name_command.append(text.charAt(i));
+            }
             if (count_space == 2) return tmp_name_command.toString();
             if (text.charAt(i) == ' ') count_space++;
-
         }
 
-        return tmp_name_command.toString();
+
+        return tmp_name_command.toString().trim();
     }
 
     /**
@@ -321,9 +324,7 @@ public class helper_console {
     }
 
     /**
-     *
      * clears the console (cross-platform)
-     *
      */
     public static void clear_console() {
         try {

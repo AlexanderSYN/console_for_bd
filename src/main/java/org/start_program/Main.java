@@ -30,14 +30,14 @@ public class Main {
 
         try {
             try (Connection conn = get_connection()) {
-                System.out.println("Connection to DB successfully");
+                System.out.println("[INFO] Connection to DB successfully");
                 isRun = false;
                 start_console();
             }
         } catch (Exception e) {
             set_data_for_bd("old_url", "old_user", "old_pass"); // old_url and etc is mean save old config for bd
-            System.err.println("Connection FAILED");
-            System.err.println("ERROR: " + e);
+            System.err.println("[ERROR] Connection FAILED");
+            System.err.println("[ERROR] " + e);
         }
     }
 
@@ -46,12 +46,12 @@ public class Main {
 
         while (isRun) {
             try {
-                System.out.println("_Welcome to the console for bd program_");
+                System.out.println("_Welcome to the console for db program_");
 
                 if (is_data_has_for_bd()) {
                     start_program();
                 } else {
-                    System.out.print("Do you want to use old data? (y/n): ");
+                    System.out.print("[INFO] Do you want to use old data? (y/n): ");
                     String is_use_old_data = in.nextLine();
 
                     if (is_use_old_data.equals("yes") || is_use_old_data.equals("y")) {
@@ -63,15 +63,15 @@ public class Main {
                             }
                         } catch (Exception e) {
                             set_data_for_bd("old_url", "old_user", "old_pass");
-                            System.err.println("Connection FAILED");
-                            System.err.println("ERROR: " + e);
+                            System.err.println("[ERROR] Connection FAILED");
+                            System.err.println("[ERROR] " + e);
                         }
                     } else {
                         start_program();
                     }
                 }
             } catch (Exception e) {
-                System.err.println("ERROR: " + e);
+                System.err.println("[ERROR] " + e);
             }
         }
     }

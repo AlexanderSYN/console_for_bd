@@ -15,7 +15,7 @@ public class sql_console  {
     public static void sql_mode(boolean isRun) {
         while (isRun) {
             try {
-                System.out.println("SQL MODE (please enter sql query): ");
+                System.out.println("[INFO][HINT] SQL MODE (please enter sql query): ");
                 String sql_query = in.nextLine();
 
                 if (sql_query.equals("ex") || sql_query.equals("exit")) {
@@ -181,7 +181,7 @@ public class sql_console  {
                 }
 
             } catch (Exception e){
-                System.err.println("ERROR: " + e);
+                System.err.println("[ERROR] " + e);
             }
         }
 

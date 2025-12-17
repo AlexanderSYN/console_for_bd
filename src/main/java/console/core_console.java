@@ -1,5 +1,7 @@
 package console;
 
+import com.fasterxml.jackson.core.JsonToken;
+
 import java.util.Scanner;
 
 import static console.sql_console.*;
@@ -25,7 +27,8 @@ public class core_console {
                     if (input_from_console.equals("help")) {
                         System.out.println("help -> for help");
                         System.out.println("sql -> for sql mode");
-                        System.out.println("mkcommand (name command) (command) -> for create your commands ");
+                        System.out.println("mkcommand (name command) (command) -> for create your commands (for writing sql queries quickly)");
+                        System.out.println("rmc (name command) -> to remove a command from quick access (json) ");
                         System.out.println("output-all-commands / all-commands -> output of all your commands");
                         System.out.println("run (name_your_command) -> to run your command");
                         System.out.println("clear data -> delete data for a quick login to your database");
@@ -52,38 +55,49 @@ public class core_console {
                         helper_console.run_command(input_from_console.substring(4));
                     }
 
+                    // delete command
+                    else if (input_from_console.substring(0,4).toLowerCase().equals("rmc ")) {
+                        System.out.println(remove_command_from_json(input_from_console.substring(4)));
+                    }
                     // create command (mkcommand)
                     else if (input_from_console.substring(0, 10).equals("mkcommand ")) {
                         if (input_from_console.substring(0, 10).equals(" ") || input_from_console.substring(0,9).equals(" ")) {
-                            System.out.println("Please write like this -> mkcommand name_command command");
+                            System.out.println("[INFO][HELP] Please write like this -> mkcommand name_command command");
                         }
 
-                        String name_command = input_from_console.substring(10);
-
-
-                        if (write_to_json(helper_console.get_name_command(input_from_console.trim()), helper_console.get_command(input_from_console))) {
-                            System.out.println("success");
-                        } else System.err.println("failed");
+                        if (write_to_json(helper_console.get_name_command(input_from_console.trim()), helper_console.get_command(input_from_console).trim())) {
+                            System.out.println("[INFO][SUCCESS] command has been saved!");
+                        } else System.err.println("[ERROR][FAILED] command hasn't been saved!");
 
                     }
 
                     else if (input_from_console.equals("mkcommand")) {
-                        System.out.println("Please write like this -> mkcommand name_command command");
+                        System.out.println("[HINT] Please write like this -> mkcommand name_command command");
                     }
                     else if (input_from_console.equals("all-commands") || input_from_console.equals("output-all-commands")) {
                         output_commands_from_json();
                     }
 
 
+                } catch (IndexOutOfBoundsException IOFBE) {
+                    System.out.println("!for help type help!");
+                    System.out.print("# ");
+                    input_from_console = in.nextLine().toLowerCase();
+
                 } catch (Exception e) {
-                    System.err.println("ERROR: " + e);
+                    System.err.println("[ERROR] " + e);
                     System.out.println("!for help type help!");
                     System.out.print("# ");
                     input_from_console = in.nextLine().toLowerCase();
                 }
             }
+        } catch (IndexOutOfBoundsException IOFBE) {
+            System.out.println("!for help type help!");
+            System.out.print("# ");
+            input_from_console = in.nextLine().toLowerCase();
+
         } catch (Exception e) {
-            System.err.println("ERROR: " + e);
+            System.err.println("[ERROR] " + e);
             System.out.println("!for help type help!");
             System.out.print("# ");
             input_from_console = in.nextLine().toLowerCase();

@@ -19,7 +19,7 @@ public class util extends helper_for_util{
             Class.forName("com.mysql.cj.jdbc.Driver");
 
         } catch (Exception e) {
-            System.err.println("ERROR: " + e);
+            System.err.println("[ERROR] " + e);
         }
     }
 
@@ -56,7 +56,7 @@ public class util extends helper_for_util{
             set_user("");
             set_password("");
             save_config();
-            System.out.println("the data for quick login to your database has been successfully deleted");
+            System.out.println("[SUCCESS] the data for quick login to your database has been successfully deleted");
         } catch (Exception e) {
             System.err.println("[ERROR] " + e);
         }

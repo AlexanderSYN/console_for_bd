@@ -26,15 +26,15 @@ public class helper_for_util {
                 .getResourceAsStream(CONFIG_PATH)) {
 
             if (in == null) {
-                throw new RuntimeException("Sorry, unable to find database.properties: " + CONFIG_PATH);
+                throw new RuntimeException("[WARNING] Sorry, unable to find database.properties: " + CONFIG_PATH);
             }
             PROOPS.load(in);
             propertiesLoaded = true;
 
         } catch (IOException ioe) {
-            throw new RuntimeException("Failed to load database properties", ioe);
+            throw new RuntimeException("[FAIL] Failed to load database properties", ioe);
         } catch (Exception e) {
-            System.err.println("ERROR: " + e);
+            System.err.println("[ERROR] " + e);
         }
     }
 
@@ -60,12 +60,12 @@ public class helper_for_util {
         try {
             String file_path = "src/main/resources/config/database.properties";
             try (OutputStream output = new FileOutputStream(file_path)) {
-                PROOPS.store(output, "Updated database configuration");
+                PROOPS.store(output, "[INFO] Updated database configuration");
             }
         } catch (IOException ioe) {
-            throw new RuntimeException("Failed to save properties: " + ioe);
+            throw new RuntimeException("[FAIL] Failed to save properties: " + ioe);
         } catch (Exception e) {
-            System.err.println("ERROR: " + e);
+            System.err.println("[ERROR] " + e);
         }
     }
 
