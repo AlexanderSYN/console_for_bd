@@ -23,8 +23,19 @@ public class util extends helper_for_util{
         }
     }
 
+    /**
+     * set data for bd in database.properties
+     *
+     * if your data is correct and the user has connected to the database,
+     * then OK, otherwise set the value to old_... to get data from database.properties
+     *
+     * @param url url server to writing like so: jdbc:mysql://<IP_ADDRESS_SERVER_OR_DOMEN>:<PORT>/<dbname>
+     * @param user user from db mysql
+     * @param password password from db mysql
+     * @throws IOException
+     */
     public static void set_data_for_bd(String url, String user, String password) throws IOException {
-        if (url.equals("old_url") && user.equals("old_user") && password.equals("old_pass")) {
+        if (url.equals("old_url") & user.equals("old_user") & password.equals("old_pass")) {
             set_url(old_url);
             set_user(old_user);
             set_password(old_pass);
@@ -76,7 +87,17 @@ public class util extends helper_for_util{
         URL = get_url();
         USER = get_user();
         PASSWORD = get_password();
+
         return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    /**
+     * find out data about the database
+     */
+    public static void get_data_about_db() {
+        System.out.println("url: " + URL);
+        System.out.println("user: " + USER);
+        System.out.println("password: " + PASSWORD);
     }
 
 }

@@ -13,18 +13,36 @@ public class Main {
 
     public static void start_program() throws IOException {
         System.out.println("please connect to your db");
-        System.out.println("example url -> jdbc:mysql://localhost:3306/dbname");
+        System.out.println("example url -> jdbc:mysql://<IP_ADDRESS_SERVER_OR_DOMEN>:<PORT>/<dbname>");
+        System.out.println("you can write help!");
         System.out.print("url: ");
         String tmp_url = in.nextLine();
-        if (tmp_url.equals("ex") || tmp_url.equals("exit")) isRun = false;
+        if (tmp_url.equalsIgnoreCase("help")) {
+            System.out.println("to connect on localhost server you can to write so: jdbc:mysql://localhsot:3306/db_name");
+            System.out.println("to connect on your server mysql you need to write so: jdbc:mysql://your_ip_address_server_or_your_domen:your_port/db_name");
+            System.out.println("if it returns an error when connecting to the database via the host, then most likely you need to give access to your ip address.");
+            System.out.print("url: ");
+            tmp_url = in.nextLine();
+        }
+
+        if (tmp_url.equals("ex") || tmp_url.equals("exit")) {
+            isRun = false;
+            return;
+        }
 
         System.out.print("user: ");
         String tmp_user = in.nextLine();
-        if (tmp_user.equals("ex") || tmp_user.equals("exit")) isRun = false;
+        if (tmp_user.equals("ex") || tmp_user.equals("exit")) {
+            isRun = false;
+            return;
+        }
 
         System.out.print("password: ");
         String tmp_password = in.nextLine();
-        if (tmp_password.equals("ex") || tmp_password.equals("exit")) isRun = false;
+        if (tmp_password.equals("ex") || tmp_password.equals("exit")) {
+            isRun = false;
+            return;
+        }
 
         set_data_for_bd(tmp_url, tmp_user, tmp_password);
 
@@ -41,6 +59,13 @@ public class Main {
         }
     }
 
+    /**
+     *
+     * if your data is correct and the user has connected to the database,
+     * then OK, otherwise set the value to old_... to get data from database.properties
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
 
@@ -54,7 +79,8 @@ public class Main {
                     System.out.print("[INFO] Do you want to use old data? (y/n): ");
                     String is_use_old_data = in.nextLine();
 
-                    if (is_use_old_data.equals("yes") || is_use_old_data.equals("y")) {
+                    if (is_use_old_data.equalsIgnoreCase("yes") ||
+                            is_use_old_data.equalsIgnoreCase("y")) {
                         try {
                             try (Connection conn = get_connection()) {
                                 System.out.println("Connection to DB successfully");
@@ -76,4 +102,3 @@ public class Main {
         }
     }
 }
-
